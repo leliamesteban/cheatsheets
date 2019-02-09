@@ -1,0 +1,23 @@
+* Install
+* Basic 
+  #+BEGIN_SRC java
+    public class Application {
+	// every iteration of variables private, public, protected; class, instance, local, member, field, static variables
+	public String hello_world = "Hello world";
+	public static void main(String[] args) {
+	    System.out.print(hello_world);
+	}
+
+	public static void method(String argument) {
+	}
+    }
+  #+END_SRC
+* Compile
+  `javac ProgramFile.java`
+* Run
+  `java ProgramFile`
+* Inheritance
+* Primitive data types
+  Worth having a section for int, float, bool etc? -probably not
+* Data structures
+  How to operate on and get more information about hash maps, arrays etc
