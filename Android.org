@@ -14,11 +14,10 @@ https://czak.pl/2016/01/13/minimal-android-project.html
 ** ADB (android-tools)
 * Create AndroidManifests.xml
  [fn:2] 
- Use ~minSdkVersion~ [fn:5] 
  Unfinished
   #+BEGIN_SRC xml :file src/main/AndroidManifest.xml
     <?xml version="1.0" encoding="utf-8"?>
-    <manifest
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="org.app_name">
       <application>
 	<activity>
@@ -30,6 +29,11 @@ https://czak.pl/2016/01/13/minimal-android-project.html
       </application>
     </manifest>
   #+END_SRC
+  Use ~minSdkVersion~ [fn:5] 
+ #+BEGIN_SRC xml
+     <uses-sdk android:minSdkVersion="N"
+              android:targetSdkVersion="N" />
+ #+END_SRC
 ** .MainActivity?
  #+BEGIN_SRC xml
      <application android:name="MainActivity">
@@ -40,7 +44,13 @@ https://czak.pl/2016/01/13/minimal-android-project.html
      <application android:name=".MainActivity">
      </application>
  #+END_SRC
- 
+** Add an icon
+   #+BEGIN_SRC sh
+   wget https://example.com/icon.png res/drawable-xhdpi/icon.png
+   #+END_SRC
+   #+BEGIN_SRC xml
+     <application android:icon="@drawable/icon">
+   #+END_SRC
 * Create MainActivity.java
   #+BEGIN_SRC java :file src/main/java/org/app_name/MainActivity.java
     package org.app_name;
@@ -66,10 +76,39 @@ https://czak.pl/2016/01/13/minimal-android-project.html
 		    description.setText("This is a description");
 
 		    setContentView(description);
-		    // import Picasso and load image file
 	    }
     }
   #+END_SRC
+** Load an image
+   Add a permission to the manifest to be able to use the internet
+
+   #+BEGIN_SRC xml
+   <uses-permission android:name="android.permission.INTERNET" />
+   #+END_SRC
+   Add the image to the layout
+   
+   Why FrameLayout
+   #+BEGIN_SRC xml
+     <?xml version="1.0" encoding="utf-8"?>
+     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		   android:layout_width="match_parent"
+		   android:layout_height="match_parent">
+
+	 <ImageView
+	     android:id="@+id/image"
+	     android:layout_width="200dp"
+	     android:layout_height="200dp"
+	     android:layout_gravity="center" />
+
+     </FrameLayout>
+   #+END_SRC
+   
+   Import image and render it in code
+   #+BEGIN_SRC java
+     import com.squareup.picasso.Picasso;
+     ImageView imageView = (ImageView) findViewById(R.id.image);
+     Picasso.with(this).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+   #+END_SRC
 * Add resources
  [fn:3] , [fn:4] 
   #+BEGIN_SRC xml :file src/main/res/values/strings.xml

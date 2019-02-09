@@ -1,1 +1,3 @@
 * Cheatsheets
+* [[file:Android.org][Android]] 
+* [[file:Java.org][Java]] 

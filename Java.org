@@ -13,9 +13,13 @@
     }
   #+END_SRC
 * Compile
-  `javac ProgramFile.java`
+  #+BEGIN_SRC sh
+  javac ProgramFile.java
+  #+END_SRC
 * Run
-  `java ProgramFile`
+  #+BEGIN_SRC sh
+  java ProgramFile
+  #+END_SRC
 * Inheritance
 * Primitive data types
   Worth having a section for int, float, bool etc? -probably not
