@@ -1,0 +1,142 @@
+* Resources
+https://developer.okta.com/blog/2018/08/10/basic-android-without-an-ide
+https://czak.pl/2016/01/13/minimal-android-project.html
+* Install prerequisites
+** Java JDK
+   See cheatsheets Java.md
+   #+BEGIN_SRC sh
+   echo $JAVA_HOME
+   #+END_SRC
+** Android SDK
+   #+BEGIN_SRC sh
+   echo $ANDROID_HOME
+   #+END_SRC
+** ADB (android-tools)
+* Create AndroidManifests.xml
+ [fn:2] 
+ Use ~minSdkVersion~ [fn:5] 
+ Unfinished
+  #+BEGIN_SRC xml :file src/main/AndroidManifest.xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <manifest
+	package="org.app_name">
+      <application>
+	<activity>
+	  <intent-filter>
+	    <action android:name="android.intent.action.MAIN" />
+	    <category android:name="android.intent.category.LAUNCHER" />
+	  </intent-filter>
+	</activity>
+      </application>
+    </manifest>
+  #+END_SRC
+** .MainActivity?
+ #+BEGIN_SRC xml
+     <application android:name="MainActivity">
+     </application>
+ #+END_SRC
+ 
+ #+BEGIN_SRC xml
+     <application android:name=".MainActivity">
+     </application>
+ #+END_SRC
+ 
+* Create MainActivity.java
+  #+BEGIN_SRC java :file src/main/java/org/app_name/MainActivity.java
+    package org.app_name;
+
+    import android.app.Activity;
+    import android.os.Bundle;
+    import android.widget.TextView;
+
+    public class MainActivity extends Activity {
+	    @Override
+	    public void onCreate(Bundle savedInstanceState) {
+		    super.onCreate(savedInstanceState);
+		    setContentView(R.layout_activity_main);
+	    }
+
+	    @Override
+	    public void onStart() {
+		    super.onStart();
+		    TextView title = (TextView) findViewById(R.id.title);
+		    textView.setText("Hello world");
+
+		    TextView description = new TextView(this);
+		    description.setText("This is a description");
+
+		    setContentView(description);
+		    // import Picasso and load image file
+	    }
+    }
+  #+END_SRC
+* Add resources
+ [fn:3] , [fn:4] 
+  #+BEGIN_SRC xml :file src/main/res/values/strings.xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <resources>
+      <string name ="app_name">Android Quick Demo</string>
+      <string name = "title">This is the title</string>
+    </resources>
+  #+END_SRC
+* Add layout file
+* Add the Gradle file
+  Install using SDKMAN or os package manager
+  #+BEGIN_SRC sh
+  sdk install gradle 5.2.1
+  #+END_SRC
+  
+  Use gradle init [fn:7] or gradlew (wrapper) [fn:6]
+  #+BEGIN_SRC sh
+  gradle init
+  #+END_SRC
+* Build APK
+  Automatically build and install on emulator or connected device
+  #+BEGIN_SRC sh
+  gradlew installDebug # signed with debug key and aligned with zipalign
+  #+END_SRC
+* Run on device
+** Emulator
+   Create AVD [fn:10], start the emulator [fn:11]
+   #+BEGIN_SRC sh
+   emulator -list-avds
+   emulator -avd avd_name
+   #+END_SRC
+** Physical device
+   Enable usb debugging [fn:1]
+   #+BEGIN_SRC sh
+   adb -d install path/to/your_app.apk
+   #+END_SRC
+* Build Bundle [fn:8]
+  #+BEGIN_SRC sh
+  #+END_SRC
+* Build release APK
+  Sign [fn:9] your app
+* Publish on Google Play
+  Publish [fn:12]
+* Footnotes
+
+[fn:12] https://developer.android.com/studio/publish/
+
+[fn:11] https://developer.android.com/studio/run/managing-avds#createavd
+
+[fn:10] https://developer.android.com/studio/run/managing-avds#createavd
+
+[fn:9] https://developer.android.com/studio/build/building-cmdline#sign_cmdline
+
+[fn:8] https://developer.android.com/studio/build/building-cmdline#build_apk
+
+[fn:7] https://guides.gradle.org/creating-new-gradle-builds/
+
+[fn:6] https://docs.gradle.org/current/userguide/gradle_wrapper.html
+
+[fn:5] https://developer.android.com/guide/topics/manifest/uses-sdk-element
+
+[fn:4] https://developer.android.com/guide/topics/resources/string-resource
+
+[fn:3] https://github.com/billyconnerjr/bare-minimum-android
+
+[fn:2] https://developer.android.com/guide/topics/manifest/manifest-intro
+
+[fn:1] https://developer.android.com/training/basics/firstapp/running-app
+
