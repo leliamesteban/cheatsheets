@@ -1,3 +1,5 @@
 * Cheatsheets
+  This is not meant to be exhaustive by any means. Merely a collection of references that prioritizes usability for my own purposes. I will not be repeating information or pretending I have an audience
 * [[file:Android.org][Android]] 
 * [[file:Java.org][Java]] 
+* [[file:Awk.org][Awk]] 
