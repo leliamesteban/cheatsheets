@@ -1,0 +1,7 @@
+  http://ndpsoftware.com/git-cheatsheet.html#loc=workspace;
+  
+  http://think-like-a-git.net/
+  
+  https://git-scm.com/book/en/v2
+* Browse the current file's git history
+  git timemachine (emacs) or [[https://githistory.xyz/][githistory.xyz]]
